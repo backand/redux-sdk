@@ -1,21 +1,21 @@
-bkndredux-sdk
+redux-sdk
 ===
-[![npm version](https://img.shields.io/npm/v/@backand/bkndredux-sdk.svg?style=flat-square)](https://www.npmjs.org/package/@backand/bkndredux-sdk)
-[![npm downloads](https://img.shields.io/npm/dt/@backand/bkndredux-sdk.svg?style=flat-square)](http://npm-stat.com/charts.html?package=@backand/bkndredux-sdk)
+[![npm version](https://img.shields.io/npm/v/@backand/redux-sdk.svg?style=flat-square)](https://www.npmjs.org/package/@backand/redux-sdk)
+[![npm downloads](https://img.shields.io/npm/dt/@backand/redux-sdk.svg?style=flat-square)](http://npm-stat.com/charts.html?package=@backand/redux-sdk)
 
 >  Backand SDK for [Redux](http://redux.js.org/).
 This SDK enables you to communicate comfortably and quickly with your Backand app.
-It wraps the [bkndvanilla-sdk](https://github.com/backand/bkndvanilla-sdk) to allow easier work on projects involving Redux.
+It wraps the [vanilla-sdk](https://github.com/backand/vanilla-sdk) to allow easier work on projects involving Redux.
 
 
 ## Installation
 - npm:
 ```bash
-$ npm i -S @backand/bkndredux-sdk
+$ npm i -S @backand/redux-sdk
 ```
 - yarn:
 ```bash
-$ yarn add @backand/bkndredux-sdk
+$ yarn add @backand/redux-sdk
 ```
 
 
