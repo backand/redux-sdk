@@ -1,7 +1,7 @@
 bkndredux-sdk
 ===
-[![npm version](https://img.shields.io/npm/v/bkndredux-sdk.svg?style=flat-square)](https://www.npmjs.org/package/bkndredux-sdk)
-[![npm downloads](https://img.shields.io/npm/dt/bkndredux-sdk.svg?style=flat-square)](http://npm-stat.com/charts.html?package=bkndredux-sdk)
+[![npm version](https://img.shields.io/npm/v/@backand/bkndredux-sdk.svg?style=flat-square)](https://www.npmjs.org/package/@backand/bkndredux-sdk)
+[![npm downloads](https://img.shields.io/npm/dt/@backand/bkndredux-sdk.svg?style=flat-square)](http://npm-stat.com/charts.html?package=@backand/bkndredux-sdk)
 
 >  Backand SDK for [Redux](http://redux.js.org/).
 This SDK enables you to communicate comfortably and quickly with your Backand app.
