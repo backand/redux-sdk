@@ -1,5 +1,5 @@
 import { SIGNIN_REQUEST, SIGNIN_RESOLVE, SIGNIN_REJECT, SIGNOUT } from './userTypes'
-import backand from 'vanillabknd-sdk'
+import backand from '@backand/vanilla-sdk'
 
 // add custom actions here!
 

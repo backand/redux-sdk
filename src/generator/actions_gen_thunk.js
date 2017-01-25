@@ -6,7 +6,7 @@ module.exports = function actions_gen (name) {
   CREATE_${upname}_RESOLVE, CREATE_${upname}_REJECT,
   UPDATE_${upname}_RESOLVE, UPDATE_${upname}_REJECT,
   REMOVE_${upname}_RESOLVE, REMOVE_${upname}_REJECT } from './${name}Types'
-import backand from 'vanillabknd-sdk'
+import backand from '@backand/vanilla-sdk'
 
 // add custom actions here!
 
@@ -16,16 +16,16 @@ export const get${camel} = (params = {}) => {
     dispatch({
       type: ${upname}_REQUEST,
     })
-    backand.object.getList('${name}', params,
-      response => {
+    backand.object.getList('${name}', params)
+      .then(response => {
         dispatch({
           type: ${upname}_RESOLVE,
           payload: {
             data: response.data
           }
         });
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch({
           type: ${upname}_REJECT,
           payload: {
@@ -38,8 +38,8 @@ export const get${camel} = (params = {}) => {
 
 export const create${camel} = (data, params = {}) => {
   return dispatch => {
-    backand.object.create('${name}', data, params,
-      response => {
+    backand.object.create('${name}', data, params)
+      .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
         // dispatch({
@@ -48,8 +48,8 @@ export const create${camel} = (data, params = {}) => {
         //     data: DATA_TO_REDUCER
         //   }
         // });
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch({
           type: CREATE_${upname}_REJECT,
           payload: {
@@ -62,8 +62,8 @@ export const create${camel} = (data, params = {}) => {
 
 export const update${camel} = (id, data, params = {}) => {
   return dispatch => {
-    backand.object.update('${name}', id, data, params,
-      response => {
+    backand.object.update('${name}', id, data, params)
+      .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
         // dispatch({
@@ -72,8 +72,8 @@ export const update${camel} = (id, data, params = {}) => {
         //     data: DATA_TO_REDUCER
         //   }
         // });
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch({
           type: UPDATE_${upname}_REJECT,
           payload: {
@@ -86,8 +86,8 @@ export const update${camel} = (id, data, params = {}) => {
 
 export const remove${camel} = (id) => {
   return dispatch => {
-    backand.object.remove('${name}', id,
-      response => {
+    backand.object.remove('${name}', id)
+      .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
         // dispatch({
@@ -96,8 +96,8 @@ export const remove${camel} = (id) => {
         //     data: DATA_TO_REDUCER
         //   }
         // });
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch({
           type: REMOVE_${upname}_REJECT,
           payload: {

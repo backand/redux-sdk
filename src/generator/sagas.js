@@ -1,9 +1,6 @@
-import backand from 'vanillabknd-sdk'
 import { take, takeEvery, takeLatest, put, call, fork, select, cancel, cancelled } from 'redux-saga/effects'
+import backand from '@backand/vanilla-sdk'
 
-// add custom sagas here!
-
-// generated sagas
 export default function* rootSaga() {
   // register custom sagas for run() here!
   // Add the following line to the array below:
@@ -13,6 +10,8 @@ export default function* rootSaga() {
     fork(userRootSaga),
   ];
 }
+
+// add custom sagas here!
 
 // object sagas
 function* getSaga ({ payload }) {

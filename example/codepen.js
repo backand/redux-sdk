@@ -11,21 +11,21 @@ const UPDATE_TODOS_REJECT  = 'UPDATE_TODOS_REJECT';
 const REMOVE_TODOS_RESOLVE = 'REMOVE_TODOS_RESOLVE';
 const REMOVE_TODOS_REJECT  = 'REMOVE_TODOS_REJECT';
 
-const get_todos = (params = {}) => {
+const getTodos = (params = {}) => {
   return dispatch => {
     dispatch({
       type: TODOS_REQUEST,
     })
-    backand.getList('todos', params,
-      response => {
+    backand.object.getList('todos', params)
+      .then(response => {
         dispatch({
           type: TODOS_RESOLVE,
           payload: {
-            data: response.data.data
+            data: response.data
           }
         });
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch({
           type: TODOS_REJECT,
           payload: {
@@ -35,10 +35,10 @@ const get_todos = (params = {}) => {
       });
   };
 }
-const create_todos = (data, params = {}) => {
+const createTodos = (data, params = {}) => {
   return dispatch => {
-    backand.create('todos', data, params,
-      response => {
+    backand.object.create('todos', data, params)
+      .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
         // dispatch({
@@ -47,8 +47,8 @@ const create_todos = (data, params = {}) => {
         //     data: DATA_TO_REDUCER
         //   }
         // });
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch({
           type: CREATE_TODOS_REJECT,
           payload: {
@@ -58,10 +58,10 @@ const create_todos = (data, params = {}) => {
       });
   };
 }
-const update_todos = (id, data, params = {}) => {
+const updateTodos = (id, data, params = {}) => {
   return dispatch => {
-    backand.update('todos', id, data, params,
-      response => {
+    backand.object.update('todos', id, data, params)
+      .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
         // dispatch({
@@ -70,8 +70,8 @@ const update_todos = (id, data, params = {}) => {
         //     data: DATA_TO_REDUCER
         //   }
         // });
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch({
           type: UPDATE_TODOS_REJECT,
           payload: {
@@ -81,10 +81,10 @@ const update_todos = (id, data, params = {}) => {
       });
   };
 }
-const remove_todos = (id) => {
+const removeTodos = (id) => {
   return dispatch => {
-    backand.remove('todos', id,
-      response => {
+    backand.object.remove('todos', id)
+      .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
         // dispatch({
@@ -93,8 +93,8 @@ const remove_todos = (id) => {
         //     data: DATA_TO_REDUCER
         //   }
         // });
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch({
           type: REMOVE_TODOS_REJECT,
           payload: {
@@ -168,74 +168,77 @@ const SIGNOUT        = 'SIGNOUT';
 
 const getUserDetails = (force) => {
   return dispatch => {
-    backand.getUserDetails(response => {
-      dispatch(resolve(response.data));
-    },
-    error => {
-      dispatch(reject(error.data));
-    }, force);
+    dispatch(request());
+    backand.user.getUserDetails(force)
+      .then (response => {
+        dispatch(resolve(response.data));
+      })
+      .catch(error => {
+        dispatch(reject(error.data));
+      });
   };
 }
 const useAnonymousAuth = () => {
   return dispatch => {
-    backand.useAnonymousAuth(response => {
-      dispatch(resolve(response.data));
-    });
+    dispatch(request());
+    backand.useAnonymousAuth()
+      .then(response => {
+        dispatch(resolve(response.data));
+      })
+      .catch(error => {
+        dispatch(reject(error.data));
+      });
   };
 }
 const signin = (username, password) => {
   return dispatch => {
-    dispatch(request())
-    backand.signin(username, password,
-      response => {
+    dispatch(request());
+    backand.signin(username, password)
+      .then(response => {
         dispatch(resolve(response.data));
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch(reject(error.data));
       });
   };
 }
 const socialSignin = (provider) => {
   return dispatch => {
-    dispatch(request())
-    backand.socialSignin(provider,
-      response => {
+    dispatch(request());
+    backand.socialSignin(provider)
+      .then(response => {
         dispatch(resolve(response.data));
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch(reject(error.data));
       });
   };
 }
-const socialSigninWithToken = (provider, token) => {
+const signup = (email, password, confirmPassword, firstName, lastName, parameters) => {
   return dispatch => {
-    dispatch(request())
-    backand.socialSigninWithToken(provider, token,
-      response => {
+    if (!backand.defaults.runSigninAfterSignup) {
+        throw new Error(`runSigninAfterSignup is false but you wish to make changes to the store.
+          For the sake of maintaining the consistent of your store, either
+          Change runSigninAfterSignup to true, or
+          use the function as is from the "vanillabknd-sdk"`);
+    }
+    dispatch(request());
+    backand.signup(firstName, lastName, email, password, confirmPassword, parameters)
+      .then(response => {
         dispatch(resolve(response.data));
-      },
-      error => {
-        dispatch(reject(error.data));
-      });
-  };
-}
-const signup = (email, password, confirmPassword, firstName, lastName) => {
-  return dispatch => {
-    dispatch(request())
-    backand.signup(email, password, confirmPassword, firstName, lastName,
-      response => {
-        dispatch(resolve(response.data));
-      },
-      error => {
+      })
+      .catch(error => {
         dispatch(reject(error.data));
       });
   };
 }
 const signout = () => {
   return dispatch => {
-    backand.signout(response => {
-      dispatch({type: SIGNOUT});
-    });
+    dispatch(request());
+    backand.signout()
+      .then(response => {
+        dispatch({ type: SIGNOUT });
+      });
   };
 }
 const request = () => {
@@ -549,7 +552,7 @@ function fetchTodos() {
     if(user.data.userId) {
       params.filter = [backand.helpers.filter.create('user', backand.helpers.filter.operators.relation.in, user.data.userId)];
     }
-    dispatch(get_todos(params));
+    dispatch(getTodos(params));
   };
 }
 const mapDispatchToProps = dispatch => {
@@ -558,13 +561,13 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchTodos())
     },
     addTodo: (data) => {
-      dispatch(create_todos(data))
+      dispatch(createTodos(data))
     },
     updateTodo: (id, data) => {
-      dispatch(update_todos(id, data))
+      dispatch(updateTodos(id, data))
     },
     removeTodo: (id) => {
-      dispatch(remove_todos(id))
+      dispatch(removeTodos(id))
     },
     getUserDetails: () => {
       dispatch(getUserDetails());

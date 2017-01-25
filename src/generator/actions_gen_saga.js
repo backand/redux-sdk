@@ -6,7 +6,7 @@ module.exports = function actions_gen (name) {
   CREATE_${upname}_RESOLVE, CREATE_${upname}_REJECT,
   UPDATE_${upname}_RESOLVE, UPDATE_${upname}_REJECT,
   REMOVE_${upname}_RESOLVE, REMOVE_${upname}_REJECT } from './${name}Types'
-import backand from 'vanillabknd-sdk'
+import backand from '@backand/vanilla-sdk'
 
 // add custom actions here!
 
