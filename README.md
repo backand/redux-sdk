@@ -1,10 +1,5 @@
 redux-sdk
 ===
->  Backand SDK for [Redux](http://redux.js.org/).
-This is the documentation for Back&'s Redux SDK. This SDK enables you to communicate comfortably and quickly with your Backand app.
-It wraps the [vanilla-sdk](https://github.com/backand/vanilla-sdk) to allow you to work with Back& more easily when working on projects based on Redux.
-
-
 ## Overview
 This SDK is a Redux wrapper around our [vanilla-sdk](https://github.com/backand/vanilla-sdk). This provides convenient objects and properties for Redux apps working with Back&. You can refer to the [vanilla-sdk](https://github.com/backand/vanilla-sdk)'s readme for a full API reference. Follow the instructions below to install our Redux SDK!
 
@@ -19,7 +14,7 @@ To install the Redux SDK, use the correct command for your dependency management
 
 
 ## Quick start
-To get started, first use `bkdnredux` to generate the necessary `Types`, `Actions`, and `Reducers` for your Backand objects from the command line: 
+To get started, first use `bkdnredux` to generate the necessary `Types`, `Actions`, and `Reducers` for your Backand objects from the command line:
 
 ```bash
 $ "./node_modules/.bin/bkndredux" --help
