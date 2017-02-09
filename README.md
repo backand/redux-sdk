@@ -1,29 +1,33 @@
 redux-sdk
 ===
 >  Backand SDK for [Redux](http://redux.js.org/).
-This SDK enables you to communicate comfortably and quickly with your Backand app.
-It wraps the [vanilla-sdk](https://github.com/backand/vanilla-sdk) to allow easier work on projects involving Redux.
+This is the documentation for Back&'s Redux SDK. This SDK enables you to communicate comfortably and quickly with your Backand app.
+It wraps the [vanilla-sdk](https://github.com/backand/vanilla-sdk) to allow you to work with Back& more easily when working on projects based on Redux.
+
+
+## Overview
+This SDK is a Redux wrapper around our [vanilla-sdk](https://github.com/backand/vanilla-sdk). This provides convenient objects and properties for Redux apps working with Back&. You can refer to the [vanilla-sdk](https://github.com/backand/vanilla-sdk)'s readme for a full API reference. Follow the instructions below to install our Redux SDK!
 
 
 ## Installation
-- npm:
-```bash
-$ npm i -S @backand/redux-sdk
-```
-- yarn:
-```bash
-$ yarn add @backand/redux-sdk
-```
+To install the Redux SDK, use the correct command for your dependency management platform:
+
+| Provider | Command |
+| -------- | ------- |
+| npm | `$ npm i -S @backand/redux-sdk` |
+| yarn | `$ yarn add @backand/redux-sdk` |
 
 
 ## Quick start
-- Use `bkndredux` to generate `Types`,`Actions`,`Reducers` for your Backand objects:
+To get started, first use `bkdnredux` to generate the necessary `Types`, `Actions`, and `Reducers` for your Backand objects from the command line: 
+
 ```bash
 $ "./node_modules/.bin/bkndredux" --help
 $ "./node_modules/.bin/bkndredux" user obj1 obj2 obj3... -m (thunk/saga)
 ```  
-***note:*** user is a unique object. It has a different `Reducer` and `Types`, and it reveals most of the authentication `Actions` (getUserDetails, signin, signout...).
-- Include `Reducers` in [combineReducers()](http://redux.js.org/docs/api/combineReducers.html):
+***Note:*** `user` is a unique object. It has a different `Reducer` and `Type`, and it reveals most of the authentication `Actions` (getUserDetails, signin, signout, etc.).
+
+Next, Include the new `Reducers` in [combineReducers()](http://redux.js.org/docs/api/combineReducers.html):
 ```javascript
 import { combineReducers } from 'redux'
 import user from './user/userReducer'
@@ -36,7 +40,8 @@ combineReducers({
   obj2
 })
 ```
-- For the middleware (thunk/saga) you are using, follow the corresponding instructions:
+
+For the next step, pick the section that applies to your chosen middleware stack - either [redux-thunk](https://github.com/gaearon/redux-thunk) or [redux-saga](https://github.com/redux-saga/redux-saga) - then follow the corresponding instructions:
 
 ### [redux-thunk](https://github.com/gaearon/redux-thunk)
 Download [redux-thunk](https://github.com/gaearon/redux-thunk) and include it in [createStore()](http://redux.js.org/docs/api/createStore.html):
@@ -48,6 +53,7 @@ createStore(rootReducer, initialState, applyMiddleware(thunk))
 ```
 ### [redux-saga](https://github.com/redux-saga/redux-saga)
 Download [redux-saga](https://github.com/redux-saga/redux-saga) and include it in [createStore()](http://redux.js.org/docs/api/createStore.html):
+
 ```javascript
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
@@ -57,7 +63,10 @@ const sagaMiddleware = createSagaMiddleware()
 createStore(rootReducer, initialState, applyMiddleware(sagaMiddleware))
 sagaMiddleware.run(rootSaga)
 ```
-- Import `Actions` and dispatch them happily! :smile:
+
+### Working with the SDK
+Once the above is completed, import `Actions` and dispatch them easily!
+
 ```javascript
 import { getUserDetails, signin, useAnonymousAuth, signout } from './user/userActions'
 
@@ -67,6 +76,7 @@ store.dispatch(getUserDetails())
 
 
 ## Examples
+Below are a few examples of Redux code that uses the Back& SDK:
 - [codepen example (thunk)](http://codepen.io/backand/pen/VmRajE)
 - [codepen example (saga)](http://codepen.io/backand/pen/pRgqyx)
 - [react-native-example](https://github.com/backand/react-native-example/tree/sdk)
