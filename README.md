@@ -22,8 +22,8 @@ To install the Redux SDK, use the correct command for your dependency management
 To get started, first use `bkdnredux` to generate the necessary `Types`, `Actions`, and `Reducers` for your Backand objects from the command line:
 
 ```bash
-$ "./node_modules/.bin/bkndredux" --help
-$ "./node_modules/.bin/bkndredux" user obj1 obj2 obj3... -m (thunk/saga)
+$ node "./node_modules/.bin/bkndredux" --help
+$ node "./node_modules/.bin/bkndredux" user obj1 obj2 obj3... -m (thunk/saga)
 ```  
 ***Note:*** `user` is a unique object. It has a different `Reducer` and `Type`, and it reveals most of the authentication `Actions` (getUserDetails, signin, signout, etc.).
 
