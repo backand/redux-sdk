@@ -11,32 +11,33 @@ import backand from '@backand/vanilla-sdk'
 // add custom actions here!
 
 // generated actions
-export const get${camel} = (params = {}) => {
+export const get${camel} = (options = {}) => {
   return {
     type: 'SAGA_GET_REQUEST',
     payload: {
       name: '${name}',
       args: [
-        params,
+        options,
       ],
     },
   }
 }
 
-export const create${camel} = (data, params = {}) => {
+export const create${camel} = (data, options = {}, parameters) => {
   return {
     type: 'SAGA_CREATE_REQUEST',
     payload: {
       name: '${name}',
       args: [
         data,
-        params,
+        options,
+        parameters
       ],
     },
   }
 }
 
-export const update${camel} = (id, data, params = {}) => {
+export const update${camel} = (id, data, options = {}, parameters) => {
   return {
     type: 'SAGA_UPDATE_REQUEST',
     payload: {
@@ -44,19 +45,21 @@ export const update${camel} = (id, data, params = {}) => {
       args: [
         id,
         data,
-        params,
+        options,
+        parameters
       ],
     },
   }
 }
 
-export const remove${camel} = (id) => {
+export const remove${camel} = (id, parameters) => {
   return {
     type: 'SAGA_REMOVE_REQUEST',
     payload: {
       name: '${name}',
       args: [
         id,
+        parameters
       ],
     },
   }

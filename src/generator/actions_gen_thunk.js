@@ -11,12 +11,12 @@ import backand from '@backand/vanilla-sdk'
 // add custom actions here!
 
 // generated actions
-export const get${camel} = (params = {}) => {
+export const get${camel} = (options = {}) => {
   return dispatch => {
     dispatch({
       type: ${upname}_REQUEST,
     })
-    backand.object.getList('${name}', params)
+    backand.object.getList('${name}', options)
       .then(response => {
         dispatch({
           type: ${upname}_RESOLVE,
@@ -36,9 +36,9 @@ export const get${camel} = (params = {}) => {
   };
 }
 
-export const create${camel} = (data, params = {}) => {
+export const create${camel} = (data, options = {}, parameters) => {
   return dispatch => {
-    backand.object.create('${name}', data, params)
+    backand.object.create('${name}', data, options, parameters)
       .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
@@ -60,9 +60,9 @@ export const create${camel} = (data, params = {}) => {
   };
 }
 
-export const update${camel} = (id, data, params = {}) => {
+export const update${camel} = (id, data, options = {}, parameters) => {
   return dispatch => {
-    backand.object.update('${name}', id, data, params)
+    backand.object.update('${name}', id, data, options, parameters)
       .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
@@ -84,9 +84,9 @@ export const update${camel} = (id, data, params = {}) => {
   };
 }
 
-export const remove${camel} = (id) => {
+export const remove${camel} = (id, parameters) => {
   return dispatch => {
-    backand.object.remove('${name}', id)
+    backand.object.remove('${name}', id, parameters)
       .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
